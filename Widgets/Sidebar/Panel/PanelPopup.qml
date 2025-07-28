@@ -9,6 +9,7 @@ import qs.Components
 
 PanelWithOverlay {
     id: sidebarPopup
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
     function showAt() {
         sidebarPopupRect.showAt();
@@ -39,6 +40,8 @@ PanelWithOverlay {
         property real slideOffset: width
         property bool isAnimating: false
 
+        Keys.onEscapePressed: sidebarPopupRect.hidePopup()
+
         function showAt() {
             if (!sidebarPopup.visible) {
                 sidebarPopup.visible = true;
@@ -62,12 +65,12 @@ PanelWithOverlay {
             if (sidebarPopupRect.wallpaperPanelModal && sidebarPopupRect.wallpaperPanelModal.visible) {
                 sidebarPopupRect.wallpaperPanelModal.visible = false;
             }
-                if (sidebarPopupRect.wifiPanelModal && sidebarPopupRect.wifiPanelModal.visible) {
-                    sidebarPopupRect.wifiPanelModal.visible = false;
-                }
-                if (sidebarPopupRect.bluetoothPanelModal && sidebarPopupRect.bluetoothPanelModal.visible) {
-                    sidebarPopupRect.bluetoothPanelModal.visible = false;
-                }
+            if (sidebarPopupRect.wifiPanelModal && sidebarPopupRect.wifiPanelModal.visible) {
+                sidebarPopupRect.wifiPanelModal.visible = false;
+            }
+            if (sidebarPopupRect.bluetoothPanelModal && sidebarPopupRect.bluetoothPanelModal.visible) {
+                sidebarPopupRect.bluetoothPanelModal.visible = false;
+            }
             if (sidebarPopup.visible) {
                 slideAnim.from = 0;
                 slideAnim.to = width;
@@ -318,7 +321,6 @@ PanelWithOverlay {
                     }
                 }
             }
-            Keys.onEscapePressed: sidebarPopupRect.hidePopup()
         }
 
         // Recording properties
