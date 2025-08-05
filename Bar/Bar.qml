@@ -29,6 +29,9 @@ Scope {
             Loader {
                 property var modelData
                 active: {
+                    if (!Settings.loaded) {
+                        return false;
+                    }
                     if (!Settings.settings.activeScreens.length) {
                         // If the list is empty, activate all screens
                         return true;

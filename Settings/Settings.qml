@@ -5,12 +5,14 @@ import Quickshell.Io
 import qs.Services
 
 Singleton {
+    id: root
 
     property string shellName: "Noctalia"
     property string settingsDir: Quickshell.env("NOCTALIA_SETTINGS_DIR") || (Quickshell.env("XDG_CONFIG_HOME") || Quickshell.env("HOME") + "/.config") + "/" + shellName + "/"
     property string settingsFile: Quickshell.env("NOCTALIA_SETTINGS_FILE") || (settingsDir + "Settings.json")
     property string themeFile: Quickshell.env("NOCTALIA_THEME_FILE") || (settingsDir + "Theme.json")
     property var settings: settingAdapter
+    property bool loaded: false
 
     Item {
         Component.onCompleted: {
@@ -29,6 +31,7 @@ Singleton {
             reload()
         }
         onLoaded: function() {
+            root.loaded = true
             Qt.callLater(function () {
                 WallpaperManager.setCurrentWallpaper(settings.currentWallpaper, true);
             })
