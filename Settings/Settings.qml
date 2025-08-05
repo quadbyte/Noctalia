@@ -68,6 +68,8 @@ Singleton {
 
             property bool showDock: true
             property bool dockExclusive: false
+
+            property var activeScreens: []
         }
     }
 
